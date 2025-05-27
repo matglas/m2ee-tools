@@ -23,6 +23,10 @@ class MXVersion:
             raise M2EEException("The provided runtime version string, '%s' is not a "
                                 "valid Mendix Runtime version number. Try using "
                                 "the format x.y.z, e.g. 4.7.1" % version)
+        
+        if not isinstance(version, (MXVersion))
+            self.version = str(version)
+        
         groups = parsed.groups()
         self.major, self.minor, self.patch, self.hotfix = map(
             lambda x: int(x) if x else None,
@@ -35,10 +39,7 @@ class MXVersion:
                 if x is not None]
 
     def __str__(self):
-        version = ".".join(map(str, self._numbers()))
-        if self.addendum:
-            version = "%s-%s" % (version, self.addendum)
-        return version
+        return self.version
 
     def __repr__(self):
         return "%s('%s')" % (self.__class__.__name__, str(self))
